@@ -7,10 +7,12 @@ function triangle(arg) {
 	let dashedTop = 2 * n - 1;
 	let spaces = 1;
 
+//Top Part - Static
 	console.log(
 		'#'.repeat(width)
 	);
 
+// Middle Part
 	for (let i = 0; i < n; i++) {
 		console.log(
 			'.'.repeat(points) +
@@ -24,6 +26,7 @@ function triangle(arg) {
 		spaces += 2;
 	}
 
+// Bottom Part
 	let dashedBottom = 2 * n - 1;
 	for (let i = 0; i < n; i++ ) {
 		console.log(
@@ -36,5 +39,5 @@ function triangle(arg) {
 	}
 }
 
-triangle(['5']);
+triangle(['8']);
 
