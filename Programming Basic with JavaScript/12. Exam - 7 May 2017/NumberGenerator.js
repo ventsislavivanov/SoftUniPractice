@@ -17,7 +17,7 @@ function numberGenerator([arg1, arg2, arg3, arg4, arg5]) {
 					specialNum = specialNum - 2;
 				} else if (currentNum % 2 == 0) {
 					specialNum = specialNum * 2;
-				} 
+				}
 
 
 				if (specialNum >= controlNum) {
