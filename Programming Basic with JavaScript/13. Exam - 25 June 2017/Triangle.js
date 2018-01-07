@@ -14,13 +14,25 @@ function triangle(arg) {
 
 // Middle Part
 	for (let i = 0; i < n; i++) {
-		console.log(
-			'.'.repeat(points) +
-			'#'.repeat(dashedTop) + 
-			' '.repeat(spaces) + 
-			'#'.repeat(dashedTop) + 
-			'.'.repeat(points)
-		);
+		if (i == Math.floor(n / 2)) {
+			console.log(
+				'.'.repeat(points) +
+				'#'.repeat(dashedTop) + 
+				' '.repeat(spaces / 2 - 1) + 
+				'(@)' + 
+				' '.repeat(spaces / 2 - 1) + 
+				'#'.repeat(dashedTop) + 
+				'.'.repeat(points)
+			);
+		} else {
+			console.log(
+				'.'.repeat(points) +
+				'#'.repeat(dashedTop) + 
+				' '.repeat(spaces) + 
+				'#'.repeat(dashedTop) + 
+				'.'.repeat(points)
+			);	
+		}
 		points++;
 		dashedTop -= 2;
 		spaces += 2;
@@ -39,5 +51,5 @@ function triangle(arg) {
 	}
 }
 
-triangle(['8']);
+triangle(['5']);
 
