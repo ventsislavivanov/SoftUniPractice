@@ -1,0 +1,15 @@
+function sumTimes([arg1, arg2, arg3]){
+	let firstTime = Number(arg1);
+	let secondTime = Number(arg2);
+	let thirtdTime = Number(arg3);
+
+	let sumTimes = firstTime + secondTime + thirtdTime;
+	let minutes = Math.trunc(sumTimes / 60);
+	let seconds = sumTimes % 60;
+	if (seconds <= 9) {
+		seconds = `0${seconds}`;
+	}
+	console.log(`${minutes}:${seconds}`);
+}
+
+sumTimes(["35", "45", "44"]);
