@@ -1,4 +1,4 @@
-function snowflake(arg) {
+function snowflake([arg]) {
 	let n = Number(arg);
 	let width = 2 * n + 3;
 	let height = 2 * n + 1
@@ -51,4 +51,4 @@ function snowflake(arg) {
 	}
 }
 
-snowflake(['30']);
+snowflake(['8']);
