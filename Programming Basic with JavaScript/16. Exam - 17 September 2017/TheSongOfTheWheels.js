@@ -3,6 +3,8 @@ function song([arg]) {
 	let result = '';
 	let count = 0;
 	let combination = '';
+	let fourthCombination = false;
+	let haveCombination = false;
 	let password = '';
 
 	for (let a = 1; a <= 9; a++) {
@@ -14,25 +16,27 @@ function song([arg]) {
 					if (a < b && c > d && a * b + c * d == m) {
 						combination += result;
 						count++
+						haveCombination = true;
 
-	console.log(combination)
-						if (combination == '') {
-							console.log('UU');
-						}
-						
 						if (count == 4) {
 							password = result;
-							//console.log(password)
-						} else {
-							password = 'No!'
+							fourthCombination = true;
 						}
 					} 
 				}
 			}
 		}
 	}
-	console.log(combination)
-	console.log(`Password: ${password}`)
+	
+	if (haveCombination == true) {
+		console.log(combination);
+	}
+	
+	if (fourthCombination == true) {
+		console.log(`Password: ${password}`)
+	} else {
+		console.log('No!');
+	}
 }
 
 song(['139']);
