@@ -78,5 +78,5 @@ function christmasToy([arg1]) {
 		'-'.repeat(n * 2)
 	);
 }
- 
+
 christmasToy(['8']);
