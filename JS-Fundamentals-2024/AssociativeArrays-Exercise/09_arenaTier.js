@@ -43,11 +43,11 @@ function solve(arr) {
 
     for (const key in gladiators) {
         let sum = 0;
-        let outsideObj = gladiators[key];
-        for (const insideKey in outsideObj) {
-            sum += outsideObj[insideKey];
+        let technique = gladiators[key];
+        for (const insideKey in technique) {
+            sum += technique[insideKey];
         }
-        outsideObj['sum'] = sum;
+        technique['sum'] = sum;
     }
 
     const sortedGladiators = Object.entries(gladiators)
