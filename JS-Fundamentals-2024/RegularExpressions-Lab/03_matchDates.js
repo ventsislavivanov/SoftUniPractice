@@ -1,12 +1,13 @@
-function matchDates(array) {
-    const pattern = /\b(?<day>\d{2}) ([-.\/]) (?<month>[A-Z][a-z]{2})\2(?<year>\d{4})\b/g;
+function matchDates(dates) {
+    const pattern = /\b(?<day>\d{2})([-.\/])(?<month>[A-Z][a-z]{2})\2(?<year>\d{4})\b/g;
 
-    let valid;
-    while (valid = pattern.exec(array) !== null) {
-        const day = valid.groups['day'];
-        const month = valid.groups['month'];
-        const year = valid.groups['year']
-        console.log(valid)
+    let validDate = [];
+
+    while ((validDate = pattern.exec(dates)) !== null) {
+        const day = validDate.groups['day'];
+        const month = validDate.groups['month'];
+        const year = validDate.groups['year']
+
         console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
     }
 }
