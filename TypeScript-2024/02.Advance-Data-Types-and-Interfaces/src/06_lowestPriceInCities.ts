@@ -32,4 +32,4 @@ lowestPrice([
     'New York | Sample Product | 1000.1',
     'New York | Burger | 10'
     ]
-)
+) 
