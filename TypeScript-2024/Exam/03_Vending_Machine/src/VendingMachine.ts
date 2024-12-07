@@ -1,4 +1,4 @@
-import { Drink } from "./Drink";
+import {Drink} from "./Drink";
 
 export class VendingMachine {
     buttonCapacity: number;
@@ -55,8 +55,7 @@ export class VendingMachine {
     }
 
     buyDrink(name: string) {
-        const drink: string = this.drinks.find((d) => d.name === name).toString();
-        return drink;
+        return this.drinks.find((d) => d.name === name).toString();
     }
 
     getCount(): number {

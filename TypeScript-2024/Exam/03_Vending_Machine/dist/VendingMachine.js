@@ -15,7 +15,7 @@ class VendingMachine {
     }
     removeDrink(name) {
         const index = this.drinks.findIndex((c) => c.name === name);
-        if (index != -1) {
+        if (index !== -1) {
             this.drinks.splice(index, 1);
             return true;
         }
@@ -44,8 +44,7 @@ class VendingMachine {
         return sorted[0].toString();
     }
     buyDrink(name) {
-        const drink = this.drinks.find((d) => d.name === name).toString();
-        return drink;
+        return this.drinks.find((d) => d.name === name).toString();
     }
     getCount() {
         return this.drinks.length;
