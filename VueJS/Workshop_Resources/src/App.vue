@@ -6,6 +6,7 @@ import Products from "./pages/Products/Products.vue";
 import Home from "./pages/Home.vue";
 import About from "./pages/About.vue";
 import Contacts from "./pages/Contacts.vue";
+import Register from "./pages/Regester/Register.vue";
 import Cart from "./pages/Cart.vue";
 
 export default {
@@ -16,11 +17,12 @@ export default {
     Home,
     About,
     Contacts,
+    Register,
     Cart
   },
   data() {
     return {
-      page: 'Products'
+      page: 'Register'
     }
   },
   methods: {
