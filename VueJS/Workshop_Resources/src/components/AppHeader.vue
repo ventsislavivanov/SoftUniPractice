@@ -20,6 +20,7 @@ export default {
         <li><a href="#" @click.prevent="$emit('change-page', 'Products')">Products</a></li>
         <li><a href="#" @click.prevent="$emit('change-page', 'About')">About</a></li>
         <li><a href="#" @click.prevent="$emit('change-page', 'Contacts')">Contacts</a></li>
+        <li><a href="#" @click.prevent="$emit('change-page', 'Register')">Register</a></li>
         <li><a href="#" @click.prevent="$emit('change-page', 'Cart')" role="button">Cart</a></li>
       </ul>
     </nav>
