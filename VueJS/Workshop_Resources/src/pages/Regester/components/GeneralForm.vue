@@ -5,13 +5,15 @@ import DoubleRow from "./DoubleRow.vue";
 import {alphaNum, email, helpers, maxLength, minLength, numeric, required, sameAs} from "@vuelidate/validators";
 
 const separateNames = helpers.regex(/^[A-Z][a-z]+ [A-Z][a-z]+$/);
-const minimalAge = (minAge) => {
+
+function minimalAge(minAge) {
   return helpers.withParams(
-    { value: minAge },
-    (value) => {
-      const age = new Date(new Date() - new Date(value).getFullYear() - 1970);
-    }
-  )
+      { minAge },
+      (value) => {
+        const age = new Date(new Date() - new Date(value)).getFullYear() - 1970;
+        return age > minAge;
+      },
+  );
 }
 
 export default {
@@ -24,6 +26,13 @@ export default {
       v$: useVuelidate()
     }
   },
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+  },
+  emits: ['next'],
   data() {
     return {
       formData: {
@@ -40,6 +49,33 @@ export default {
   methods: {
     async onSubmit() {
       const isValid = await this.v$.$validate();
+      if (isValid) {
+        this.$emit('next', this.formData);
+      }
+    },
+    initState(dataPropVal) {
+      this.formData = {
+        name: dataPropVal.name,
+        password: dataPropVal.password,
+        confirmPassword: dataPropVal.confirmPassword,
+        email: dataPropVal.email,
+        phone: dataPropVal.phone,
+        gender: dataPropVal.gender,
+        dateOfBirth: dataPropVal.dateOfBirth,
+      }
+    }
+  },
+  watch: {
+    data: {
+      handler(newVal, oldVal) {
+        const areSame = oldVal && (JSON.stringify(Object.entries(newVal).sort()) ===  Object.entries(oldVal).sort());
+
+        if (areSame) {
+          this.initState(newVal);
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   validations() {
@@ -56,7 +92,7 @@ export default {
           alphaNum,
         },
         confirmPassword: {
-          sameAsPassword: sameAs(this.password)
+          sameAsPassword: sameAs(this.formData.password)
         },
         email: {
           required,
@@ -65,8 +101,8 @@ export default {
         phone: {
           required,
           numeric,
-          minLength: minLength(10),
-          maxLength: maxLength(10),
+          minLength: minLength(9),
+          maxLength: maxLength(9),
         },
         gender: { required },
         dateOfBirth: {
