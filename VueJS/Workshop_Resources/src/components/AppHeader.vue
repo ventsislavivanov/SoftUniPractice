@@ -1,7 +1,25 @@
 <script>
 export default {
-  emits:['select', 'change-page']
-}
+  data() {
+    return {
+      links: [
+        { name: 'home', label: 'Home' },
+        { name: 'products', label: 'Products' },
+        { name: 'about', label: 'About' },
+        { name: 'contacts', label: 'Contacts' },
+        { name: 'register', label: 'Register' },
+        { name: 'favorites', label: 'Favorites' },
+      ],
+    };
+  },
+  methods: {
+    onCartClick() {
+      this.$router.push({
+        name: 'cart',
+      });
+    },
+  },
+};
 </script>
 
 <template>
@@ -10,18 +28,22 @@ export default {
       <ul>
         <li>
           <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Q0hUaUi7lLLC5UOslM9ul_B8NyXTKNn9BcBGtCXV&s"
-              alt="logo"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Q0hUaUi7lLLC5UOslM9ul_B8NyXTKNn9BcBGtCXV&s"
+            alt="logo"
           >
         </li>
       </ul>
       <ul>
-        <li><a href="#" @click.prevent="$emit('change-page', 'Home')">Home</a></li>
-        <li><a href="#" @click.prevent="$emit('change-page', 'Products')">Products</a></li>
-        <li><a href="#" @click.prevent="$emit('change-page', 'About')">About</a></li>
-        <li><a href="#" @click.prevent="$emit('change-page', 'Contacts')">Contacts</a></li>
-        <li><a href="#" @click.prevent="$emit('change-page', 'Register')">Register</a></li>
-        <li><a href="#" @click.prevent="$emit('change-page', 'Cart')" role="button">Cart</a></li>
+        <li v-for="link in links" :key="link.path">
+          <router-link :to="{ name: link.name }">
+            {{ link.label }}
+          </router-link>
+        </li>
+        <li>
+          <button type="button" class="primary" @click="onCartClick">
+            Cart
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -34,9 +56,5 @@ nav {
 
 nav img {
   height: 2rem;
-}
-
-main {
-  padding: 1rem 2rem;
 }
 </style>

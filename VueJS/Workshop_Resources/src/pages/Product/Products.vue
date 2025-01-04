@@ -1,62 +1,52 @@
 <script>
-import Categories from "./components/Categories.vue";
-import ProductCard from "./components/ProductCard.vue";
-import {getAllProducts, getProductsByCategory} from "../../../services/products.js";
+import { getAllProducts, getProductsByCategory } from '../../services/productsServices';
+import Categories from './components/Categories.vue';
+import ProductCard from './components/ProductCard.vue';
 
 export default {
   components: {
+    Categories,
     ProductCard,
-    Categories
   },
   data() {
     return {
       activeCategory: '',
       isLoading: true,
-      products: []
-    }
-  },
-  methods: {
-    async onSelect(value) {
-      const category = this.activeCategory === value ? '' : value;
-      this.activeCategory = category;
-
-      await this.loadProducts(category);
-    },
-    async loadProducts(category = '') {
-      this.isLoading = true;
-
-      if (category) {
-        this.products = await getProductsByCategory(category);
-      } else {
-        this.products = await getAllProducts();
-      }
-
-      this.isLoading = false;
-    }
+      products: [],
+    };
   },
   async created() {
     await this.loadProducts();
   },
-}
+  methods: {
+    async onSelect(value) {
+      const category = this.activeCategory === value ? '' : value;
+
+      this.activeCategory = category;
+      await this.loadProducts(category);
+    },
+    async loadProducts(category = '') {
+      this.isLoading = true;
+      if (category) {
+        this.products = await getProductsByCategory(category);
+      }
+      else {
+        this.products = await getAllProducts(category);
+      }
+      this.isLoading = false;
+    },
+  },
+};
 </script>
 
 <template>
   <div>
-    <Categories
-        :active="activeCategory"
-        @select="onSelect"
-    />
+    <Categories :active="activeCategory" @select="onSelect" />
   </div>
 
   <progress v-if="isLoading" />
-
   <div v-else-if="products.length > 0" class="products">
-    <ProductCard
-      v-for="product in products"
-      :id="product.id"
-      :key="product.id + '-' + product.title"
-      :product="product"
-    />
+    <ProductCard v-for="prod in products" :key="prod.title + prod.id" :product="prod" />
   </div>
 </template>
 
