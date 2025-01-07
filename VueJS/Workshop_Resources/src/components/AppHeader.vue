@@ -1,5 +1,11 @@
 <script>
+import { useCartStore } from '../stores/useCartStore';
+import { useUserStore } from '../stores/useUserStore';
+
 export default {
+  setup() {
+    return { userStore: useUserStore(), cartStore: useCartStore() };
+  },
   data() {
     return {
       links: [
@@ -9,8 +15,20 @@ export default {
         { name: 'contacts', label: 'Contacts' },
         { name: 'register', label: 'Register' },
         { name: 'favorites', label: 'Favorites' },
+        { name: 'login', label: 'Login' },
       ],
     };
+  },
+  computed: {
+    userName() {
+      return this.userStore.user?.username ?? '';
+    },
+    cartLength() {
+      return this.cartStore.products.size;
+    },
+  },
+  async created() {
+    await this.userStore.reAuthUser();
   },
   methods: {
     onCartClick() {
@@ -41,7 +59,13 @@ export default {
         </li>
         <li>
           <button type="button" class="primary" @click="onCartClick">
-            Cart
+            Cart <span v-if="cartLength">{{ cartLength }}</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="outline">
+            {{ userName }}
           </button>
         </li>
       </ul>

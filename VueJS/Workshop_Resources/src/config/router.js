@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import About from '../pages/About.vue';
-import Cart from '../pages/Cart.vue';
+import Cart from '../pages/Cart/Cart.vue';
 import Contacts from '../pages/Contacts.vue';
 import Favorites from '../pages/Favorites.vue';
 import Home from '../pages/Home.vue';
+import Login from '../pages/Login.vue';
 import NotFound from '../pages/NotFound.vue';
 import Products from '../pages/Product/Products.vue';
 import SingleProduct from '../pages/Product/SingleProduct.vue';
@@ -11,6 +12,7 @@ import Register from '../pages/Register/Register.vue';
 import User from '../pages/User/User.vue';
 import UserDetails from '../pages/User/UserDetails.vue';
 import UserEdit from '../pages/User/UserEdit.vue';
+import { useUserStore } from '../stores/useUserStore';
 // import UserHome from '../pages/User/UserHome.vue';
 
 const routes = [
@@ -22,11 +24,33 @@ const routes = [
   { path: '/cart', name: 'cart', component: Cart },
   { path: '/product', name: 'singleProduct', component: SingleProduct },
   {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    beforeEnter: async () => {
+      const store = useUserStore();
+      if (store.user) {
+        return false;
+      }
+
+      const isLogged = await store.reAuthUser();
+      if (isLogged) {
+        return false;
+      }
+    },
+  },
+  {
     path: '/favorites',
     name: 'favorites',
     component: Favorites,
-    beforeEnter: (to, from) => {
-      console.log('Going into favorites', to, from);
+    beforeEnter: async () => {
+      const store = useUserStore();
+      if (!store.user) {
+        const isLogged = await store.reAuthUser();
+        if (!isLogged) {
+          return { name: 'login' };
+        }
+      }
     },
   },
 
@@ -48,12 +72,12 @@ const router = createRouter({
   history: createWebHistory(),
 });
 
-router.beforeEach((to, from) => {
-  console.log('Before the routing', to, from);
-});
+// router.beforeEach((to, from) => {
+//   console.log('Before the routing', to, from);
+// });
 
-router.afterEach((to, from) => {
-  console.log('AFTER the routing', to, from);
-});
+// router.afterEach((to, from) => {
+//   console.log('AFTER the routing', to, from);
+// });
 
 export default router;
