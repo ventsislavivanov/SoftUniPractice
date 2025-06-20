@@ -1,0 +1,15 @@
+<div class="register-box">
+    <h1>Register</h1>
+    <form method="post" name="register-form">
+        <label for="username">Username</label>
+        <input type="text" placeholder="Username.." id="username" name="username" {{#if data.username}} value="{{data.email}}"{{/if}}>
+        <label for="email">Email</label>
+        <input type="text" placeholder="Email.." id="email" name="email" {{#if data.email}} value="{{data.email}}"{{/if}}>
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password.." id="password" name="password">
+        <label for="repass">Confirm Password</label>
+        <input type="password" placeholder="Confirm Password.." id="repass" name="repass">
+        <input type="submit" value="Submit">
+    </form>
+    <p>Already have an account? <a href="/login">Login here</a></p>
+</div>

@@ -52,7 +52,7 @@ async function deleteById(id, userId) {
         throw new Error('Access denied');
     }
 
-    await Date.findByIdAndDelete(id);
+    await Data.findByIdAndDelete(id);
 }
 
 export {
