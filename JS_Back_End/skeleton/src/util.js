@@ -4,16 +4,19 @@ function parseError(err) {
             // Generic error
             err.errors = [err.message];
         } else {
-            // Mongoose validaton error
-            const error = new Error('Input validaton error');
-            error.errors = Object.fromEntries(Object.values(err.errors).map(e => [e.path, e.message]));
-
+            // Mongoose validation error
+            const error = new Error('Input validation error');
+            error.errors = Object.fromEntries(
+                Object.values(err.errors).map(e => [e.path, e.message])
+            );
             return error;
         }
     } else if (Array.isArray(err)) {
-        // Express-validation error array
-        const error = new Error('Input validaton error');
-        error.errors = Object.fromEntries(err.errors).map(e => [e.path, e.message]);
+        // Express-validator error array
+        const error = new Error('Input validation error');
+        error.errors = Object.fromEntries(
+            err.map(e => [e.path, e.msg])
+        );
 
         return error;
     }
