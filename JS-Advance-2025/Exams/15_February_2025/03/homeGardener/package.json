@@ -1,0 +1,16 @@
+{
+  "name": "homeGardener",
+  "version": "1.0.0",
+  "main": "homeGardener.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "chai": "^5.1.2",
+    "mocha": "^11.1.0"
+  }
+}
